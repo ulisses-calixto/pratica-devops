@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "API Gerenciamento - Trabalho prático da disciplina DevOps Tools.",
+  "main": "src/api.js",
+  "scripts": {
+    "start": "node src/api.js",
+    "dev": "nodemon src/api.js"
+  },
+  "keywords": [],
+  "author": "Ulisses Calixto",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "axios": "^1.16.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pg": "^8.21.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
