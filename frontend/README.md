@@ -1,16 +1,37 @@
-# React + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interface de usuário desenvolvida em React para o sistema de gestão de favoritos. Esse painel permite que os operadores realizem o cadastro de usuários, tendo a possibilidade de remova-los ou edita-los além da navegação por um catálogo de produtos integrado por meio de uma API externa permitindo favoritar e gerenciar listas de favoritos para cada usuário de forma rápida.
 
-Currently, two official plugins are available:
+## Tecnologias usadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* **React (Vite)**: Framework principal.
+* **Tailwind CSS**: Estilização.
+* **React Query (TanStack)**: Gerenciamento de estado de servidor, cache e sincronização de dados.
+* **Axios**: Cliente HTTP para comunicação com a API (Backend).
+* **React Router Dom**: Navegação entre as páginas.
 
-## React Compiler
+## Pré-requisitos
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Para rodar o projeto localmente, certifique-se de ter o seguinte instalado na sua máquina:
+* [Node.js](https://nodejs.org/) (Versão LTS 22.x ou superior recomendada)
+* A API do backend rodando (preferencialmente via Docker na porta `2375`).
 
-## Expanding the ESLint configuration
+## Como rodar o projeto localmente
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 1. Clone e instale as dependências
+Abra o seu terminal, navegue até a pasta do frontend e execute:
+
+```bash
+npm install
+
+### 2. Configure a conexão com a API
+Verifique no arquivo de serviços (src/services/api.js ou equivalente) se a base URL aponta corretamente para o seu backend local. Por padrão, a aplicação espera que o backend esteja rodando em:
+http://localhost:2375
+
+### 3. Inicie o servidor de desenvolvimento
+Execute o comando do Vite para levantar a aplicação:
+
+```bash
+npm run dev
+
+O terminal exibirá uma URL local (geralmente http://localhost:5173). Basta abrir este link no seu navegador para acessar o painel do sistema.
