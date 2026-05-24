@@ -152,8 +152,8 @@ app.get('/usuarios/:id/favoritos', async (req, res) => {
     }
 });
 
-app.delete('/favoritos', async (req, res) => {
-    const {id_usuario, id_produto} = req.body;
+app.delete('/usuarios/:id_usuario/favoritos/:id_produto', async (req, res) => {
+    const {id_usuario, id_produto} = req.params;
     try {
         const resultado = await pool.query(
             'delete from "Favoritos" where id_usuario = $1 and id_produto = $2',
