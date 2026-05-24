@@ -23,6 +23,7 @@ Abra o seu terminal, navegue até a pasta do frontend e execute:
 
 ```bash
 npm install
+```
 
 ### 2. Configure a conexão com a API
 Verifique no arquivo de serviços (src/services/api.js ou equivalente) se a base URL aponta corretamente para o seu backend local. Por padrão, a aplicação espera que o backend esteja rodando em:
@@ -33,5 +34,6 @@ Execute o comando do Vite para levantar a aplicação:
 
 ```bash
 npm run dev
+```
 
 O terminal exibirá uma URL local (geralmente http://localhost:5173). Basta abrir este link no seu navegador para acessar o painel do sistema.

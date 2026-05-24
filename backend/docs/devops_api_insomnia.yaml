@@ -1,0 +1,326 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: pratica_devops_crud_system
+meta:
+  id: wrk_9d0990bcac6c4be9a236c6eec4e237c0
+  created: 1779570549049
+  modified: 1779571785434
+  description: ""
+collection:
+  - url: http://localhost:2375/health
+    name: health
+    meta:
+      id: req_ad5d011118d74660afcef525921bc46b
+      created: 1779570862866
+      modified: 1779570890537
+      isPrivate: false
+      description: ""
+      sortKey: -1779570548972
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - name: CRUD Usuários
+    meta:
+      id: fld_5a629f97974a403f908e50f597d8b56f
+      created: 1779571369532
+      modified: 1779571369532
+      sortKey: -1779571369533
+      description: ""
+    children:
+      - url: http://localhost:2375/usuarios
+        name: criar usuário
+        meta:
+          id: req_253c8af1a1d9442eb016abf96a9e4147
+          created: 1779570549072
+          modified: 1779581693981
+          isPrivate: false
+          description: ""
+          sortKey: -1779571377935
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome": "Ulisses Gomes",
+            	"email": "ulissesgomes@email.com"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:2375/usuarios
+        name: listar usuários
+        meta:
+          id: req_a4bc9b30d3324aefb42bd225076adb5d
+          created: 1779571117809
+          modified: 1779571399060
+          isPrivate: false
+          description: ""
+          sortKey: -1779571377885
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:2375/usuarios/1
+        name: listar usuário(id)
+        meta:
+          id: req_c0bfdf533a434fd1aebde99acea7cb88
+          created: 1779571174487
+          modified: 1779582120725
+          isPrivate: false
+          description: ""
+          sortKey: -1779571377860
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:2375/usuarios/1
+        name: atualizar usuário(id)
+        meta:
+          id: req_5fb7068f1b614868ad57ae9d7b6cfdcc
+          created: 1779571220128
+          modified: 1779582147758
+          isPrivate: false
+          description: ""
+          sortKey: -1779571377835
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome": "Otavio Fidelis",
+            	"email": "otavio@email.com"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:2375/usuarios/5
+        name: deletar usuário
+        meta:
+          id: req_ac32acd9dd2d43b3a28e3c30fda2760f
+          created: 1779571300946
+          modified: 1779625795249
+          isPrivate: false
+          description: ""
+          sortKey: -1779571377735
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Produtos
+    meta:
+      id: fld_a906ab1925aa4fcc9dc5d08f7e66dc4c
+      created: 1779571489021
+      modified: 1779571489021
+      sortKey: -1779571489021
+      description: ""
+    children:
+      - url: http://localhost:2375/produtos
+        name: listar produtos
+        meta:
+          id: req_ffbafa7c41b942feb3b4c9bbe5ae56e7
+          created: 1779571493220
+          modified: 1779571534141
+          isPrivate: false
+          description: ""
+          sortKey: -1779571493220
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:2375/produtos/17
+        name: listar produtos(id)
+        meta:
+          id: req_12e47704598e49668ef66a693136b9de
+          created: 1779571598479
+          modified: 1779574545864
+          isPrivate: false
+          description: ""
+          sortKey: -1779571493120
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Favoritos
+    meta:
+      id: fld_e0f894f4323845c8a85af9aff43e720a
+      created: 1779571800024
+      modified: 1779571800024
+      sortKey: -1779571800024
+      description: ""
+    children:
+      - url: http://localhost:2375/favoritos
+        name: criar favorito
+        meta:
+          id: req_f41f4238deca497bbff689300801690b
+          created: 1779571803929
+          modified: 1779626610488
+          isPrivate: false
+          description: ""
+          sortKey: -1779571805726
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"id_usuario": "1",
+            	"id_produto": "3"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:2375/usuarios/1/favoritos
+        name: listar favoritos do usuario
+        meta:
+          id: req_de2ca40cd49d43f99a7d854a2e32a61d
+          created: 1779572180143
+          modified: 1779586371391
+          isPrivate: false
+          description: ""
+          sortKey: -1779571805676
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:2375/usuarios/1/favoritos/3
+        name: deletar favorito(id)
+        meta:
+          id: req_8c5aea28123c4142857726079bad4b3c
+          created: 1779572286590
+          modified: 1779626635172
+          isPrivate: false
+          description: ""
+          sortKey: -1779571805626
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_547d04e87653984d916e3dcaf64b844bd56191e6
+    created: 1779570549059
+    modified: 1779570549059
+environments:
+  name: Base Environment
+  meta:
+    id: env_547d04e87653984d916e3dcaf64b844bd56191e6
+    created: 1779570549054
+    modified: 1779570549054
+    isPrivate: false
