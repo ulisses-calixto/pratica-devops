@@ -50,19 +50,14 @@ export default function Produtos() {
     });
   };
 
-  if (isLoading) return <p className="p-8 text-center text-emerald-600 italic">Carregando produtos...</p>;
-  if (isError) return <p className="p-8 text-center text-red-600 italic">Erro ao carregar produtos.</p>;
+  if (isLoading) return <p className="p-8 text-center text-emerald-500 italic">Carregando produtos...</p>;
+  if (isError) return <p className="p-8 text-center text-red-500 italic">Erro ao carregar produtos da API externa.</p>;
 
   return (
     <div className="max-w-5xl mx-auto p-6">
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 border-b border-emerald-300 pb-4">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-800 tracking-tight">
-            Catálogo de Produtos
-          </h1>
-          <p className="text-gray-500 text-sm mt-1">Selecione produtos e associe-os aos favoritos dos usuários.</p>
-        </div>
-      </div>
+        <h1 className="text-2xl font-bold text-gray-800 mb-8 border-b border-emerald-400 pb-6">
+          Catálogo de Produtos
+        </h1>
 
       {produtos?.length === 0 ? (
         <p className="text-gray-500 italic text-center py-10">Nenhum produto encontrado.</p>
@@ -73,7 +68,7 @@ export default function Produtos() {
               key={prod.id}
               produto={prod}
               textoBotao="Favoritar"
-              corBotao="bg-teal-600 hover:bg-teal-700"
+              corBotao="bg-pink-50 hover:bg-pink-100"
               aoClicarBotao={clicarFavoritar}
             />
           ))}

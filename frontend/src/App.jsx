@@ -1,6 +1,7 @@
 import React from "react";
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Usuarioscrud from "./pages/Usuarioscrud";
 import Produtos from "./pages/Produtos";
 import Favoritos from "./pages/Favoritos";
@@ -26,6 +27,8 @@ function App() {
                         } />
                     </Routes>
                 </main>
+
+                <Footer/>
             </div>
         </BrowserRouter>    
     );

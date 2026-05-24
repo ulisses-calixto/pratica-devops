@@ -82,12 +82,12 @@ export default function UsuariosCRUD() {
   };
 
   //tela
-  if (isLoading) return <p className="p-8 text-center text-emerald-600 italic">Carregando...</p>;
-  if (isError) return <p className="p-8 text-center text-red-600 italic">Erro de conexão.</p>;
+  if (isLoading) return <p className="p-8 text-center text-emerald-500 italic">Carregando usuários...</p>;
+  if (isError) return <p className="p-8 text-center text-red-500 italic">Erro de conexão com o banco de dados.</p>;
 
   return (
     <div className="max-w-5xl mx-auto p-6">
-      <h1 className="text-2xl font-bold text-gray-800 mb-8 border-b border-emerald-300 pb-4">
+      <h1 className="text-2xl font-bold text-gray-800 mb-8 border-b border-emerald-400 pb-6">
         Gerenciamento de Usuários
       </h1>
 
@@ -131,7 +131,7 @@ export default function UsuariosCRUD() {
                   onClick={cancelarEdicao}
                   className="w-full bg-red-50 text-red-500 text-sm font-medium py-2 px-4 hover:bg-red-100"
                 >
-                  Cancelar Edição
+                  Cancelar
                 </button>
               )}
             </div>
@@ -163,7 +163,7 @@ export default function UsuariosCRUD() {
                       <td className="p-2 text-right space-x-2">
                         <button 
                           onClick={() => setEditandoUsuario(user)}
-                          className="text-purple-600 hover:text-purple-800 font-medium text-sm"
+                          className="py-1 px-2 bg-purple-50 text-purple-500 hover:bg-purple-100 font-medium text-sm"
                         >Editar
                         </button>
                         <button
@@ -173,7 +173,7 @@ export default function UsuariosCRUD() {
                               if(editandoUsuario?.id === user.id) setEditandoUsuario(null);
                             }
                           }}
-                          className="text-red-500 hover:text-red-700 font-medium text-sm"
+                          className="py-1 px-2 bg-red-50 text-red-500 hover:bg-red-100 font-medium text-sm"
                         > Deletar
                         </button>
                       </td>

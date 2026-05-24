@@ -16,7 +16,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           
           <div className="flex-shrink-0 flex items-center">
-            <Link to="/" className="text-emerald-900 font-extrabold text-2xl flex items-center">
+            <Link to="/" className="text-emerald-700 font-extrabold text-2xl flex items-center">
               FAV.
             </Link>
           </div>
@@ -25,19 +25,19 @@ export default function Navbar() {
             <div className="ml-10 flex items-baseline space-x-3">
               <Link 
                 to="/usuarios" 
-                className={`px-3 py-1 rounded-full text-sm font-medium ${linkAtivo('/usuarios')}`}
+                className={`px-3 py-1 text-sm font-medium ${linkAtivo('/usuarios')}`}
               >
                 Usuários
               </Link>
               <Link 
                 to="/produtos" 
-                className={`px-3 py-1 rounded-full text-sm font-medium ${linkAtivo('/produtos')}`}
+                className={`px-3 py-1 text-sm font-medium ${linkAtivo('/produtos')}`}
               >
                 Produtos
               </Link>
               <Link 
                 to="/favoritos" 
-                className={`px-3 py-1 rounded-full text-sm font-medium ${linkAtivo('/favoritos')}`}
+                className={`px-3 py-1 text-sm font-medium ${linkAtivo('/favoritos')}`}
               >
                 Meus Favoritos
               </Link>
