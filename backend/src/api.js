@@ -139,28 +139,29 @@ app.get('/usuarios/:id/favoritos', async (req, res) => {
         );
         if (dbResultado.rows.length === 0) {
             return res.status(200).json([]);
-        }  
+        }
+
         const idFavoritos = dbResultado.rows.map(row => row.id_produto);
         
-        const produtosData = await Promise.all(
-            idFavoritos.map(async (produtoId) => {
-                const urlDestino = `https://fakestoreapi.com/products/${produtoId}`;
-                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(urlDestino)}`;
-                const response = await axios.get(proxyUrl);
-                const produto = response.data;
-                return {
-                    id: produto.id,
-                    imagem: produto.image,
-                    titulo: produto.title,
-                    preco: produto.price,
-                    avaliacao: produto.rating
-                };
-            })
-        );
+        const urlDestino = 'https://fakestoreapi.com/products';
+        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(urlDestino)}`;
+        
+        const response = await axios.get(proxyUrl, { timeout: 5000 });
+        const todosProdutos = response.data;
+        
+        const produtosData = todosProdutos
+            .filter(produto => idFavoritos.includes(produto.id))
+            .map(produto => ({
+                id: produto.id,
+                imagem: produto.image,
+                titulo: produto.title,
+                preco: produto.price,
+                avaliacao: produto.rating
+            }));
         res.status(200).json(produtosData);
     } catch (err) {
         console.error(`Erro ao buscar favoritos do usuário ${id}:`, err.message);
-        res.status(500).json({ error: 'Erro ao buscar favoritos.', detalhes: err.message });
+        res.status(500).json({ error: 'Erro ao processar a lista de favoritos.', detalhes: err.message });
     }
 });
 
