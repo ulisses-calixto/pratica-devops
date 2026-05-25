@@ -90,22 +90,38 @@ app.delete('/usuarios/:id', async (req, res) => {
     }
 });
 
-//produtos api externa 
+
+// api externa
 app.get('/produtos', async (req, res) => {
     try {
-        const response = await axios.get('https://fakestoreapi.com/products');
+        const response = await axios.get('https://fakestoreapi.com/products', {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+                'Accept': 'application/json, text/plain, */*'
+            },
+            timeout: 10000 
+        });
         res.status(200).json(response.data);
     } catch (err) {
+        console.error("Falha na comunicação com a API Externa:", err.message);
         res.status(500).json({ error: 'Erro ao buscar produtos da API externa', detalhes: err.message });
     }
 });
 
+//rota direta api externa
 app.get('/produtos/:id', async (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
     try {
-        const response = await axios.get(`https://fakestoreapi.com/products/${id}`);
+        const response = await axios.get(`https://fakestoreapi.com/products/${id}`, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+                'Accept': 'application/json, text/plain, */*'
+            },
+            timeout: 10000
+        });
         res.status(200).json(response.data);
     } catch (err) {
+        console.error(`Falha ao buscar o produto ${id}:`, err.message);
         res.status(500).json({ error: 'Erro ao buscar o produto', detalhes: err.message });
     }
 });
