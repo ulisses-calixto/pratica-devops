@@ -90,7 +90,6 @@ app.delete('/usuarios/:id', async (req, res) => {
     }
 });
 
-
 // api externa
 app.get('/produtos', async (req, res) => {
     try {
@@ -105,7 +104,6 @@ app.get('/produtos', async (req, res) => {
     }
 });
 
-// produto especifico via proxy
 app.get('/produtos/:id', async (req, res) => {
     const { id } = req.params;
     try {
@@ -134,17 +132,21 @@ app.post('/favoritos', async (req, res) => {
 });
 
 app.get('/usuarios/:id/favoritos', async (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
     try {
         const dbResultado = await pool.query(
-            'select id_produto from "Favoritos" where id_usuario = $1', [id]);
+            'select id_produto from "Favoritos" where id_usuario = $1', [id]
+        );
         if (dbResultado.rows.length === 0) {
             return res.status(200).json([]);
-        }
+        }  
         const idFavoritos = dbResultado.rows.map(row => row.id_produto);
+        
         const produtosData = await Promise.all(
-            idFavoritos.map(async(produtoId) => {
-                const response = await axios.get(`https://fakestoreapi.com/products/${produtoId}`);
+            idFavoritos.map(async (produtoId) => {
+                const urlDestino = `https://fakestoreapi.com/products/${produtoId}`;
+                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(urlDestino)}`;
+                const response = await axios.get(proxyUrl);
                 const produto = response.data;
                 return {
                     id: produto.id,
@@ -157,6 +159,7 @@ app.get('/usuarios/:id/favoritos', async (req, res) => {
         );
         res.status(200).json(produtosData);
     } catch (err) {
+        console.error(`Erro ao buscar favoritos do usuário ${id}:`, err.message);
         res.status(500).json({ error: 'Erro ao buscar favoritos.', detalhes: err.message });
     }
 });
