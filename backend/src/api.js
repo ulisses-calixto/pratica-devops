@@ -94,7 +94,14 @@ app.delete('/usuarios/:id', async (req, res) => {
 app.get('/produtos', async (req, res) => {
     try {
         const proxyUrl = process.env.API_EXTERNA || 'https://fakestoreapi.com/products';
-        const response = await axios.get(proxyUrl, {timeout: 5000});
+
+        const response = await axios.get(proxyUrl, {
+            timeout: 5000,
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'application/json'
+            }
+        });
         res.status(200).json(response.data);
     } catch (err) {
         console.error("Erro no proxy para API Externa:", err.message);
@@ -106,7 +113,14 @@ app.get('/produtos/:id', async (req, res) => {
     const {id} = req.params;
     try {
         const proxyUrl = process.env.API_EXTERNA || 'https://fakestoreapi.com/products';
-        const response = await axios.get(`${proxyUrl}/${id}`, {timeout: 5000});
+ 
+        const response = await axios.get(`${proxyUrl}/${id}`, {
+            timeout: 5000,
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'application/json'
+            }
+        });
         res.status(200).json(response.data);
     } catch (err) {
         console.error(`Erro no Proxy para o produto ${id}:`, err.message);
