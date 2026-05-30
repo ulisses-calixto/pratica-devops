@@ -7,7 +7,7 @@ const axios = require('axios');
 const app = express();
 
 app.use(cors({
-  origin: ['https://frontend-devops-favorite.pages.dev', 'http://localhost'], 
+  origin: ['https://favorito.ulissescalixto.site', 'http://localhost'], 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
