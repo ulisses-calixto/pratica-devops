@@ -97,7 +97,7 @@ app.delete('/usuarios/:id', async (req, res) => {
 // api externa
 app.get('/produtos', async (req, res) => {
     try {
-        const proxyUrl = 'http://nginx/fakestore/products';
+        const proxyUrl = process.env.API_EXTERNA || 'https://fakestoreapi.com/products';
         const response = await axios.get(proxyUrl, {timeout: 6000});
         res.status(200).json(response.data);
     } catch (err) {
@@ -109,7 +109,7 @@ app.get('/produtos', async (req, res) => {
 app.get('/produtos/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const proxyUrl = `https://nginx/fakestore/products/${id}`;
+        const proxyUrl = process.env.API_EXTERNA_ID || `https://fakestoreapi.com/products/${id}`;
         const response = await axios.get(proxyUrl, {timeout: 6000});
         res.status(200).json(response.data);
     } catch (err) {
