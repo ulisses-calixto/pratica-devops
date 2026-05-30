@@ -92,7 +92,7 @@ export default function UsuariosCRUD() {
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className='p-6 border bg-white border-gray-300'>
+        <div className='p-6 border rounded-md bg-white border-gray-300'>
           <h2 className={'text-md font-medium mb-4'}>
             {editandoUsuario ? `Editando: ${editandoUsuario.id}` : 'Novo Usuário'}
           </h2>
@@ -102,7 +102,7 @@ export default function UsuariosCRUD() {
               <input 
                 {...register('nome', { required: true })}
                 type="text" 
-                className="w-full text-sm border border-gray-300 p-2"
+                className="w-full text-sm border rounded-md border-gray-300 p-2"
                 placeholder="Nome Sobrenome"
               />
             </div>
@@ -111,7 +111,7 @@ export default function UsuariosCRUD() {
               <input 
                 {...register('email', { required: true })}
                 type="email" 
-                className="w-full text-sm border border-gray-300 p-2"
+                className="w-full text-sm border rounded-md border-gray-300 p-2"
                 placeholder="E-mail"
               />
             </div>
@@ -120,7 +120,7 @@ export default function UsuariosCRUD() {
               <button 
                 type="submit" 
                 disabled={criarUsuario.isPending || atualizarUsuario.isPending}
-                className={`w-full text-black text-sm font-medium py-2 px-4 ${editandoUsuario ? 'bg-purple-300 hover:bg-purple-400' : 'bg-emerald-300 hover:bg-emerald-400'}`}
+                className={`w-full py-2 rounded-md text-white font-medium ${editandoUsuario ? 'bg-purple-500 hover:bg-purple-600' : 'bg-emerald-500 hover:bg-emerald-600'}`}
               >
                 {editandoUsuario ? 'Salvar' : 'Cadastrar Usuário'}
               </button>
@@ -129,7 +129,7 @@ export default function UsuariosCRUD() {
                 <button 
                   type="button" 
                   onClick={cancelarEdicao}
-                  className="w-full bg-red-50 text-red-500 text-sm font-medium py-2 px-4 hover:bg-red-100"
+                  className="w-full py-2 rounded-md bg-red-100 text-md font-medium text-red-500"
                 >
                   Cancelar
                 </button>
@@ -138,14 +138,14 @@ export default function UsuariosCRUD() {
           </form>
         </div>
 
-        <div className="md:col-span-2 p-6 bg-white border border-gray-300">
-          <h2 className="text-md font-medium mb-4 text-gray-800">Usuários Cadastrados ({usuarios?.length || 0})</h2>
+        <div className="md:col-span-2 p-6 rounded-md bg-white border border-gray-300">
+          <h2 className="text-md font-medium mb-4 text-black">Usuários Cadastrados ({usuarios?.length || 0})</h2>
           
           {usuarios?.length === 0 ? (
-            <p className="text-gray-500 text-sm italic">Nenhum usuário cadastrado.</p>
+            <p className="text-red-500 text-sm italic">Nenhum usuário cadastrado.</p>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full text-left border">
+              <table className="w-full text-left border-b ">
                 <thead>
                   <tr className="text-gray-500 text-sm bg-gray-100">
                     <th className="p-2 border-b">ID</th>
@@ -163,7 +163,7 @@ export default function UsuariosCRUD() {
                       <td className="p-2 text-right space-x-2">
                         <button 
                           onClick={() => setEditandoUsuario(user)}
-                          className="py-1 px-2 bg-purple-50 text-purple-500 hover:bg-purple-100 font-medium text-sm"
+                          className="py-1 px-2 rounded-md bg-purple-100 text-purple-500 hover:bg-purple-200 font-medium text-sm"
                         >Editar
                         </button>
                         <button
@@ -173,7 +173,7 @@ export default function UsuariosCRUD() {
                               if(editandoUsuario?.id === user.id) setEditandoUsuario(null);
                             }
                           }}
-                          className="py-1 px-2 bg-red-50 text-red-500 hover:bg-red-100 font-medium text-sm"
+                          className="py-1 px-2 rounded-md bg-red-100 text-red-500 hover:bg-red-200 font-medium text-sm"
                         > Deletar
                         </button>
                       </td>

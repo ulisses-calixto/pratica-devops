@@ -70,16 +70,16 @@ export default function Favoritos() {
     <div className="max-w-5xl mx-auto p-6 ">
       
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 border-b border-emerald-400 pb-6">
-        <h1 className="text-2xl font-bold text-gray-800  ">
+        <h1 className="text-2xl font-bold text-black">
           Gerenciamento de Favoritos
         </h1>
 
-        <div className="bg-gray-100 border-gray-300 flex items-center gap-2 ">
-          <label className="text-xs font-medium text-gray-700">Filtrar:</label>
+        <div className="border-gray-300 flex items-center gap-3">
+          <label className="text-sm font-medium text-gray-700">Filtrar:</label>
           <select 
             value={usuarioSelecionadoId}
             onChange={(e) => setUsuarioSelecionadoId(e.target.value)}
-            className="border border-gray-300 p-1 bg-white text-gray-700 text-sm min-w-[180px]"
+            className="border rounded-md border-gray-300 p-2 bg-white text-gray-700 text-sm w-full"
           >
             <option value="">Selecione um usuário</option>
             {usuarios?.map((user) => (
@@ -92,12 +92,12 @@ export default function Favoritos() {
       </div>
 
       {!usuarioSelecionadoId ? (
-        <div className="text-center py-16 border-2 border-dashed border-gray-300">
+        <div className="text-center py-16 border-2 border-dashed border-gray-300 rounded-md">
           <p className="text-gray-500 text-md">Oops, selecione um usuário antes em "Filtrar"</p>
         </div>
       ) : produtosFavoritados.length === 0 ? (
-        <div className="text-center py-16 bg-white border border-gray-100">
-          <p className="text-gray-400 italic text-lg">Este cliente ainda não possui produtos favoritados.</p>
+        <div className="text-center py-16 border-2 border-dotted border-gray-300 rounded-md">
+          <p className="text-gray-500 text-md">Este cliente ainda não possui produtos favoritados.</p>
         </div>
       ) : (
         <div>
@@ -111,7 +111,7 @@ export default function Favoritos() {
                 key={item.id}
                 produto={item} 
                 textoBotao="Remover"
-                corBotao="bg-pink-50 hover:bg-pink-100"
+                corBotao="bg-pink-500 hover:bg-pink-600"
                 carregando={removerFavorito.isPending}
                 aoClicarBotao={() => {
                   if (window.confirm(`Remover "${item.title}" dos favoritos deste cliente?`)) {
