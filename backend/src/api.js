@@ -7,7 +7,7 @@ const axios = require('axios');
 const app = express();
 
 app.use(cors({
-  origin: ['https://favorito.ulissescalixto.site', 'http://localhost'], 
+  origin: ['https://frontend-devops-favorite.pages.dev', 'http://localhost'], 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
@@ -97,11 +97,11 @@ app.delete('/usuarios/:id', async (req, res) => {
 // api externa
 app.get('/produtos', async (req, res) => {
     try {
-        const proxyUrl = process.env.API_EXTERNA || 'https://fakestoreapi.com/products';
+        const proxyUrl = 'http://nginx/fakestore/products';
         const response = await axios.get(proxyUrl, {timeout: 6000});
         res.status(200).json(response.data);
     } catch (err) {
-        console.error("Erro ao buscar produtos.", err.message);
+        console.error("Erro no Proxy/API Externa:", err.message);
         res.status(500).json({ error: 'Erro ao buscar produtos da API externa', detalhes: err.message });
     }
 });
@@ -109,7 +109,7 @@ app.get('/produtos', async (req, res) => {
 app.get('/produtos/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const proxyUrl = process.env.API_EXTERNA_ID || `https://fakestoreapi.com/products/${id}`;
+        const proxyUrl = `https://nginx/fakestore/products/${id}`;
         const response = await axios.get(proxyUrl, {timeout: 6000});
         res.status(200).json(response.data);
     } catch (err) {
@@ -141,9 +141,13 @@ app.get('/usuarios/:id/favoritos', async (req, res) => {
         if (dbResultado.rows.length === 0) {
             return res.status(200).json([]);
         }
+
         const idFavoritos = dbResultado.rows.map(row => row.id_produto);
-        const proxyUrl = 'http://nginx/fakestore/products';
-        const response = await axios.get(proxyUrl, { timeout: 6000 });
+        
+        const urlDestino = 'https://fakestoreapi.com/products';
+        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(urlDestino)}`;
+        
+        const response = await axios.get(proxyUrl, { timeout: 5000 });
         const todosProdutos = response.data;
         
         const produtosData = todosProdutos
