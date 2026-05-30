@@ -105,7 +105,7 @@ export default function Favoritos() {
             <span className="text-emerald-600 ">({produtosFavoritados.length})</span> produto(s) favoritado(s) pelo usuário selecionado.
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {produtosFavoritados.map((item) => (
               <Cardproduto
                 key={item.id}
