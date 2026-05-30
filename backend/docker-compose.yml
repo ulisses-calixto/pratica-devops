@@ -21,6 +21,7 @@ services:
     ports:
       - "2375:2375"
     environment:
+      - API_EXTERNA=http://nginx/fakestore/products
       - DB_HOST=db
       - DB_USER=admulisses       
       - DB_PASSWORD=ulisses123   

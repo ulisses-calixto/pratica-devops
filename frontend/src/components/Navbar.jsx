@@ -77,14 +77,14 @@ export default function Navbar() {
             <Link 
               to="/usuarios" 
               onClick={() => setMenuAberto(false)}
-              className={`block py-3 text-md rounded-md font-medium ${linkAtivo('/usuarios')}`}
+              className={`block py-2 text-md rounded-md font-medium ${linkAtivo('/usuarios')}`}
             >
               Usuários
             </Link>
             <Link 
               to="/produtos" 
               onClick={() => setMenuAberto(false)}
-              className={`block py-3 text-md rounded-md font-medium ${linkAtivo('/produtos')}`}
+              className={`block py-2 text-md rounded-md font-medium ${linkAtivo('/produtos')}`}
             >
               Produtos
             </Link>
