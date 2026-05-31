@@ -1,5 +1,5 @@
 FROM nginx:stable-alpine
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.cloud.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
