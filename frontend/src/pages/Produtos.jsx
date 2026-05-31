@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useQuery, useMutation} from '@tanstack/react-query';
 import {api} from '../services/api';
+import axios from 'axios';
 import Cardproduto from '../components/Cardproduto';
 import Modal from '../components/Modal';
 
@@ -12,7 +13,7 @@ export default function Produtos() {
   const { data: produtos, isLoading, isError } = useQuery({
     queryKey: ['produtos'],
     queryFn: async () => {
-      const response = await api.get('/produtos');
+      const response = await axios.get('https://fakestoreapi.com/products');
       return response.data;
     }
   });
