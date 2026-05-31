@@ -58,8 +58,6 @@ export default function UsuariosCRUD() {
       queryClient.invalidateQueries(['usuarios']);
     }
   });
-
-
   useEffect(() => {
     if(editandoUsuario) {
       setValue('nome', editandoUsuario.nome);

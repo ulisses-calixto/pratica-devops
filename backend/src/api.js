@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
-const axios = require('axios');
 
 const app = express();
 
@@ -87,30 +86,6 @@ app.delete('/usuarios/:id', async (req, res) => {
     }
 });
 
-// api externa
-app.get('/produtos', async (req, res) => {
-    try {
-        const proxyUrl = process.env.API_EXTERNA;
-        const response = await axios.get(proxyUrl, {timeout: 5000});
-        res.status(200).json(response.data);
-    } catch (err) {
-        console.error("Erro no proxy para API Externa:", err.message);
-        res.status(500).json({ error: 'Erro ao buscar produtos da API externa', detalhes: err.message });
-    }
-});
-
-app.get('/produtos/:id', async (req, res) => {
-    const {id} = req.params;
-    try {
-        const proxyUrl = process.env.API_EXTERNA;
-        const response = await axios.get(`${proxyUrl}/${id}`, {timeout: 5000});
-        res.status(200).json(response.data);
-    } catch (err) {
-        console.error(`Erro no Proxy para o produto ${id}:`, err.message);
-        res.status(500).json({ error: 'Erro ao buscar o produto', detalhes: err.message });
-    }
-});
-
 //favoritos
 app.post('/favoritos', async (req, res) => {
     const { id_usuario, id_produto } = req.body;
@@ -131,27 +106,10 @@ app.get('/usuarios/:id/favoritos', async (req, res) => {
         const dbResultado = await pool.query(
             'select id_produto from "Favoritos" where id_usuario = $1', [id]
         );
-        if (dbResultado.rows.length === 0) {
-            return res.status(200).json([]);
-        }
-        const idFavoritos = dbResultado.rows.map(row => row.id_produto);
-
-        const proxyUrl = process.env.API_EXTERNA;
-        const response = await axios.get(proxyUrl, { timeout: 5000 });
-        const todosProdutos = response.data;
-        const produtosData = todosProdutos
-            .filter(produto => idFavoritos.includes(produto.id))
-            .map(produto => ({
-                id: produto.id,
-                imagem: produto.image,
-                titulo: produto.title,
-                preco: produto.price,
-                avaliacao: produto.rating
-            }));
-        res.status(200).json(produtosData);
+        res.status(200).json(dbResultado.rows); 
     } catch (err) {
         console.error(`Erro ao buscar favoritos do usuário ${id}:`, err.message);
-        res.status(500).json({ error: 'Erro ao processar a lista de favoritos.', detalhes: err.message });
+        res.status(500).json({ error: 'Erro ao buscar favoritos no banco de dados.', detalhes: err.message });
     }
 });
 

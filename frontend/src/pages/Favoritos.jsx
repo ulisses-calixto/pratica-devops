@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../services/api';
-
+import axios from 'axios';
 import Cardproduto from '../components/Cardproduto';
 
 export default function Favoritos() {
   const queryClient = useQueryClient();
   
-  // Estado para controlar qual cliente estamos visualizando
   const [usuarioSelecionadoId, setUsuarioSelecionadoId] = useState('');
 
-  // ==========================================
-  // 1. READ: Buscar Lista de Usuários para o Dropdown
-  // ==========================================
+  // 1. Buscar Lista de Usuários para o Dropdown
   const { data: usuarios, isLoading: loadingUsers } = useQuery({
     queryKey: ['usuarios'],
     queryFn: async () => {
@@ -21,29 +18,38 @@ export default function Favoritos() {
     }
   });
 
-  // ==========================================
-  // 2. READ: Buscar Favoritos do Usuário Selecionado
-  // ==========================================
-  // Esta busca só é ativada (enabled) quando um ID de usuário é selecionado no select
-  const { data: favoritosRaw, isLoading: loadingFavoritos, isError } = useQuery({
+  // 2. Busca apenas os IDs dos favoritos no banco de dados
+  const { data: favoritosRaw, isLoading: loadingFavoritos, isError: isErrorFavoritos } = useQuery({
     queryKey: ['favoritos', usuarioSelecionadoId],
     queryFn: async () => {
       const response = await api.get(`/usuarios/${usuarioSelecionadoId}/favoritos`);
       return response.data;
     },
-    enabled: !!usuarioSelecionadoId, // Evita requisições com id vazio
+    enabled: !!usuarioSelecionadoId,
   });
 
-  // ==========================================
-  // 3. DELETE: Remover dos Favoritos 
-  // ==========================================
-  // Utiliza a sua rota exata: /usuarios/:id_usuario/favoritos/:id_produto
+  // 3. Busca a lista completa de produtos
+  const { data: produtosFakeStore, isLoading: loadingProdutos, isError: isErrorProdutos } = useQuery({
+    queryKey: ['produtosFakeStore'],
+    queryFn: async () => {
+      const response = await axios.get('https://fakestoreapi.com/products');
+      return response.data;
+    },
+    enabled: !!favoritosRaw && favoritosRaw.length > 0,
+  });
+
+  // 4. Crazando os dados
+  // Filtra os produtos da FakeStore para mostrar apenas os que o usuário favoritou
+  const produtosFavoritados = produtosFakeStore?.filter(produto => {
+    return favoritosRaw?.some(fav => fav.id_produto === produto.id);
+  }) || [];
+
+  // 5. Deleta o favorito do banco de dados
   const removerFavorito = useMutation({
     mutationFn: async (idProduto) => {
       await api.delete(`/usuarios/${usuarioSelecionadoId}/favoritos/${idProduto}`);
     },
     onSuccess: () => {
-      // Invalida apenas o cache de favoritos daquele usuário específico
       queryClient.invalidateQueries(['favoritos', usuarioSelecionadoId]);
       alert('Produto removido dos favoritos.');
     },
@@ -52,19 +58,11 @@ export default function Favoritos() {
     }
   });
 
-  // mapeando
-  const produtosFavoritados = favoritosRaw?.map((item) => ({
-    id: item.id,
-    image: item.imagem,
-    title: item.titulo,
-    price: item.preco,
-    rating: item.avaliacao
-  })) || [];
-
-  const isLoading = loadingUsers || (!!usuarioSelecionadoId && loadingFavoritos);
+  const isLoading = loadingUsers || (!!usuarioSelecionadoId && loadingFavoritos) || loadingProdutos;
+  const isError = isErrorFavoritos || isErrorProdutos;
 
   if (isLoading) return <p className="p-8 text-center text-emerald-500 italic">Carregando favoritos...</p>;
-  if (isError) return <p className="p-8 text-center text-red-500 italic">Erro ao carregar os dados de favoritos do banco de dados.</p>;
+  if (isError) return <p className="p-8 text-center text-red-500 italic">Erro ao carregar os dados de favoritos.</p>;
 
   return (
     <div className="max-w-5xl mx-auto p-6 ">
@@ -102,7 +100,7 @@ export default function Favoritos() {
       ) : (
         <div>
           <div className="mb-4 text-sm italic text-gray-600">
-            <span className="text-emerald-600 ">({produtosFavoritados.length})</span> produto(s) favoritado(s) pelo usuário selecionado.
+            <span className="text-emerald-600 font-bold">({produtosFavoritados.length})</span> produto(s) favoritado(s) pelo usuário selecionado.
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
