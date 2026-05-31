@@ -48,11 +48,9 @@ app.get('/usuarios/:id', async (req, res) => {
     const {id} = req.params;
     try {
         const result = await pool.query('select * from "Usuarios" where id = $1', [id]);
-        
         if (result.rows.length === 0) {
             return res.status(404).json({ error: 'Usuário não encontrado.' });
         }
-        
         res.status(200).json(result.rows[0]);
     } catch (err) {
         res.status(500).json({ error: 'Erro ao buscar usuário', detalhes: err.message });
@@ -80,7 +78,6 @@ app.delete('/usuarios/:id', async (req, res) => {
     const {id} = req.params;
     try {
         const result = await pool.query('delete from "Usuarios" where id = $1 returning *', [id]);
-        
         if (result.rows.length === 0) {
             return res.status(404).json({ error: 'Usuário não encontrado.' });
         }
@@ -93,8 +90,7 @@ app.delete('/usuarios/:id', async (req, res) => {
 // api externa
 app.get('/produtos', async (req, res) => {
     try {
-        const proxyUrl = process.env.API_EXTERNA || 'https://fakestoreapi.com/products';
-
+        const proxyUrl = process.env.API_EXTERNA;
         const response = await axios.get(proxyUrl, {timeout: 5000});
         res.status(200).json(response.data);
     } catch (err) {
@@ -106,8 +102,7 @@ app.get('/produtos', async (req, res) => {
 app.get('/produtos/:id', async (req, res) => {
     const {id} = req.params;
     try {
-        const proxyUrl = process.env.API_EXTERNA || 'https://fakestoreapi.com/products';
- 
+        const proxyUrl = process.env.API_EXTERNA;
         const response = await axios.get(`${proxyUrl}/${id}`, {timeout: 5000});
         res.status(200).json(response.data);
     } catch (err) {
@@ -141,7 +136,7 @@ app.get('/usuarios/:id/favoritos', async (req, res) => {
         }
         const idFavoritos = dbResultado.rows.map(row => row.id_produto);
 
-        const proxyUrl = 'http://nginx/fakestore/products';;
+        const proxyUrl = process.env.API_EXTERNA;
         const response = await axios.get(proxyUrl, { timeout: 5000 });
         const todosProdutos = response.data;
         const produtosData = todosProdutos

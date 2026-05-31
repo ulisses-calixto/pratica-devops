@@ -1,7 +1,7 @@
 services:
 
   nginx:
-    image: nginx:stable-alpine
+    build: ./nginx
     container_name: devops_nginx
     ports:
       - "80:80"
