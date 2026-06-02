@@ -1,5 +1,4 @@
 services:
-
   nginx:
     build: ./nginx
     container_name: devops_nginx
@@ -10,8 +9,6 @@ services:
     depends_on:
       - front
       - api
-
-  # A Interface (React)
 
   front:
     build: ./frontend

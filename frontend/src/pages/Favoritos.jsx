@@ -67,7 +67,7 @@ export default function Favoritos() {
   return (
     <div className="max-w-5xl mx-auto p-6 ">
       
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 border-b border-emerald-400 pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 border-b border-emerald-500 pb-6">
         <h1 className="text-2xl font-bold text-black">
           Gerenciamento de Favoritos
         </h1>
@@ -77,7 +77,7 @@ export default function Favoritos() {
           <select 
             value={usuarioSelecionadoId}
             onChange={(e) => setUsuarioSelecionadoId(e.target.value)}
-            className="border rounded-md border-gray-300 p-2 bg-white text-gray-700 text-sm w-full"
+            className="border rounded-md border-gray-300 p-2 bg-white text-gray-700 text-sm md:min-w-80 lg:min-w-72 w-full"
           >
             <option value="">Selecione um usuário</option>
             {usuarios?.map((user) => (
@@ -100,7 +100,7 @@ export default function Favoritos() {
       ) : (
         <div>
           <div className="mb-4 text-sm italic text-gray-600">
-            <span className="text-emerald-600 font-bold">({produtosFavoritados.length})</span> produto(s) favoritado(s) pelo usuário selecionado.
+            <span className="text-emerald-500 font-bold">({produtosFavoritados.length})</span> produto(s) favoritado(s) pelo usuário selecionado.
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">

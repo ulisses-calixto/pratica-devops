@@ -1,27 +1,27 @@
-## 🚀 Projeto Prático DevOps: Full-Stack Containerizado com NGINX
+### Prática DevOps: Full-Stack Containerizado + NGINX
 
-Bem-vindo ao repositório do projeto. Este é um ambiente robusto, moderno e totalmente containerizado que simula uma infraestrutura de produção local. Foi utilizado o **NGINX** como um Proxy Reverso unificando um frontend em **React (Vite)**, um backend em **Node.js (Express)** e um banco de dados **PostgreSQL**.
+Bem-vindo ao repositório do projeto. Este é um ambiente simples, mas funcional, aparentemente. O projeto é totalmente containerizado, temos uma infraestrutura de produção. Foi utilizado o *NGINX* como um proxy reverso unificando o frontend em *React (Vite)*, o backend em *Node.js (Express)* e banco de dados *PostgreSQL*. A UI  permite que o professor realize o CRUD simples de usuários, tendo a possibilidade de criar, editar, atualizar e deletar. Além da navegação por um catálogo de produtos integrado por meio de uma API externa(FakeStoreAPI), que faz a integração dos produtos do catálogo escolhidos e associados aos usuários cadastrados.
 
-Interface de usuário desenvolvida em React para o sistema de gestão de favoritos. Esse painel permite que os operadores realizem o cadastro de usuários, tendo a possibilidade de remova-los ou edita-los além da navegação por um catálogo de produtos integrado por meio de uma API externa permitindo favoritar e gerenciar listas de favoritos para cada usuário de forma rápida.
+A disciplina de DevOps Tools é ministrada pelo [Prof. Welligton Feitosa](https://github.com/spaaws).
 
-A API REST de USUÁRIOS, foi desenvolvida em Node.js para fim de prática com DevOps da disciplina DevOps Tools, ministrada pelo [Prof. Welligton Feitosa](https://github.com/spaaws). Este backend é responsável por gerenciar o cadastro de clientes (usuários), integrar com o catálogo de produtos de uma API externa e administrar as listas de favoritos de cada uma.
-
----
-
-## 🏗️ Arquitetura do Projeto Local
-
-Quando você inicia o projeto, o Docker cria uma rede interna onde os contêineres conversam de forma isolada e segura:
-* **NGINX (Porta 80):** O único ponto de contato com o seu navegador. Ele distribui o tráfego de forma inteligente.
-    * `http://localhost/` ➡️ Roteia diretamente para o Frontend (Vite).
-    * `http://localhost/api/` ➡️ Roteia para a API Node.js.
-    * `http://localhost/fakestore/` ➡️ Faz o proxy seguro para a API externa da FakeStore (sem problemas de CORS!).
-* **Frontend (Vite - Porta 5173 interna):** Interface SPA em React.
-* **Backend (Node.js - Porta 2375):** API que gerencia as regras de negócio e favoritos.
-* **Banco de Dados (Postgres - Porta 5432 interna / 5433 externa):** Armazenamento relacional dos dados.
+*Obs: Não houve implementação de sistema de autenticação. O projeto é de finalidade acadêmica, pensado para colocar o professor em primeiro plano como o admin nativo, afim da analise do projeto sem muitas "barreiras". Isso desfez minha ideia de um Auth(JWT), por exemplo, aqui.*
 
 ---
 
-## 🛠️ Pré-requisitos
+## Arquitetura do projeto local
+
+Quando você inicia o projeto, o Docker cria uma rede interna onde os contêineres conversam entre si de maneira isolada e segura:
+* **NGINX (Porta 80):** Ele distribui o tráfego.
+    * `http://localhost/` -> Roteia diretamente para o frontend (Vite).
+    * `http://localhost/api/` -> Roteia para a API Node.js.
+    * `http://localhost/fakestore/` -> Faz o proxy seguro para a API externa da FakeStore.
+* **Frontend (Vite - Porta 5173 interna):** Interface React.
+* **Backend (Node.js - Porta 2375):** API que gerencia o CRUD de usuários e favoritos.
+* **Banco de Dados (Postgres - Porta 5432 interna / 5433 externa):** Armazenamento relacional dos dados dos usuários e seus favoritados.
+
+---
+
+## Pré-requisitos
 
 Antes de começar, certifique-se de ter instalado em sua máquina:
 1.  [Docker Desktop](https://www.docker.com/products/docker-desktop/)
@@ -29,63 +29,34 @@ Antes de começar, certifique-se de ter instalado em sua máquina:
 
 ---
 
-## 🖥️ Como Executar Localmente (Passo a Passo)
+## Como executar localmente
 
-### 1. Clonar e Acessar o Projeto
+### 1. Clonar e acessar o projeto
 Abra o seu terminal na pasta do projeto onde se encontra o arquivo `docker-compose.yml`.
 
-### 2. Construir e Iniciar os Contêineres
-Para compilar as imagens (sem usar lixo de cache antigo) e subir os serviços em segundo plano, execute o comando:
+### 2. Construir e iniciar os contêineres
+Para compilar as imagens (sem usar o resto de cache antigo) e subir os serviços em segundo plano, execute o comando:
 
 ```bash
-docker-compose up --build -d
+docker-compose up -d -build
 ```
-O que significa cada flag?
-    * `--build`: Força o Docker a reler os seus Dockerfiles (garante que alterações recentes no código sejam aplicadas).
-    * `-d`: Roda no modo "detached" (em segundo plano), liberando o seu terminal.
+
+---
 
 ### 3. Verificar se está tudo rodando
-Para garantir que todos os 4 contêineres subiram com sucesso e nenhum entrou em pane, digite:
+Para verificar se todos os 4 contêineres subiram com sucesso, cole o comando abaixo no seu terminal:
 
 ```bash
 docker-compose ps
 ```
-Todos os serviços devem exibir o status Up ou running.
+Todos os serviços devem exibir o status Up.
 
 ---
 
-## 🌐 Links Úteis para Testar no Navegador
-Interface Web (Frontend): `http://localhost`
+## Links para testes no navegador
+Interface web (Frontend): `http://localhost`
 
-Status da API (Backend): `http://localhost/api/usuarios/1/favoritos` (Substitua pelo ID de teste do banco)
+Status da API (Backend): `http://localhost/api/health`
 
-Proxy da FakeStore: `http://localhost/fakestore/products`
-Proxy da FakeStore: `http://localhost/fakestore/products/:id`
-
----
-
-## 🪵 Comandos de Sobrevivência (Logs e Debug)
-Se algo não se comportar como esperado, use os logs para descobrir o motivo:
-
-- Ver logs de todos os serviços juntos:
-
-```bash
-docker-compose logs -f
-```
-
-- Ver logs específicos de um serviço (Ex: Frontend):
-
-```bash
-docker-compose logs front
-```
-
-- Reiniciar um contêiner específico sem derrubar o resto (Ex: Backend após mudar o código):
-
-```bash
-docker-compose restart api
-```
-- Parar e remover todos os contêineres da memória:
-
-```bash
-docker-compose down
-```
+Proxy da API externa retorna todos os produtos: `http://localhost/fakestore/products`
+E esse para produto especifico pelo 'id': `http://localhost/fakestore/products/:id`

@@ -1,13 +1,13 @@
 # Frontend
 
-Interface de usuário desenvolvida em React para o sistema de gestão de favoritos. Esse painel permite que os operadores realizem o cadastro de usuários, tendo a possibilidade de remova-los ou edita-los além da navegação por um catálogo de produtos integrado por meio de uma API externa permitindo favoritar e gerenciar listas de favoritos para cada usuário de forma rápida.
+Interface de usuário desenvolvida em React para o sistema. A UI permite que os operadores realizem o cadastro de usuários, com possibilidade de editar, atualizar e deletar do banco de dados. Além da navegação por um catálogo de produtos integrado por meio de uma API externa permitindo favoritar e gerenciar listas de favoritos para cada usuário de forma rápida.
 
 ## Tecnologias usadas
 
 * **React (Vite)**: Framework principal.
 * **Tailwind CSS**: Estilização.
 * **React Query (TanStack)**: Gerenciamento de estado de servidor, cache e sincronização de dados.
-* **Axios**: Cliente HTTP para comunicação com a API (Backend).
+* **Axios**: Cliente HTTP para comunicação direta com a API externa.
 * **React Router Dom**: Navegação entre as páginas.
 
 ## Pré-requisitos

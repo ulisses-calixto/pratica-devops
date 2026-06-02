@@ -56,7 +56,7 @@ export default function Produtos() {
 
   return (
     <div className="max-w-5xl mx-auto p-6">
-        <h1 className="text-2xl font-bold text-black mb-8 border-b border-emerald-400 pb-6">
+        <h1 className="text-2xl font-bold text-black mb-8 border-b border-emerald-500 pb-6">
           Catálogo de Produtos
         </h1>
 

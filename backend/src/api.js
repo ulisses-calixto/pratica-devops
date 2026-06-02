@@ -16,11 +16,13 @@ const pool = new Pool({
     port: process.env.DB_PORT,
 });
 
+// status API
 app.get('/health', (req, res) => {
     res.status(200).json({ status: 'up' });
 });
 
 //crud usuario
+//criar
 app.post('/usuarios', async (req, res) => {
     const {nome, email} = req.body;
     try {
@@ -34,6 +36,7 @@ app.post('/usuarios', async (req, res) => {
     }
 });
 
+// buscar
 app.get('/usuarios', async (req, res) => {
     try {
         const result = await pool.query('select * from "Usuarios" order by id asc');
@@ -43,6 +46,7 @@ app.get('/usuarios', async (req, res) => {
     }
 });
 
+// usuários pelo id
 app.get('/usuarios/:id', async (req, res) => {
     const {id} = req.params;
     try {
@@ -56,6 +60,7 @@ app.get('/usuarios/:id', async (req, res) => {
     }
 });
 
+// atualiza usuário
 app.put('/usuarios/:id', async (req, res) => {
     const {id} = req.params;
     const {nome, email} = req.body;
@@ -73,6 +78,7 @@ app.put('/usuarios/:id', async (req, res) => {
     }
 });
 
+// deletar usuário
 app.delete('/usuarios/:id', async (req, res) => {
     const {id} = req.params;
     try {
@@ -87,6 +93,7 @@ app.delete('/usuarios/:id', async (req, res) => {
 });
 
 //favoritos
+// criar integração usuário <-> produtos
 app.post('/favoritos', async (req, res) => {
     const { id_usuario, id_produto } = req.body;
     try {
@@ -100,6 +107,7 @@ app.post('/favoritos', async (req, res) => {
     }
 });
 
+// lista usuários e seus respectivos produtos
 app.get('/usuarios/:id/favoritos', async (req, res) => {
     const {id} = req.params;
     try {
@@ -113,6 +121,7 @@ app.get('/usuarios/:id/favoritos', async (req, res) => {
     }
 });
 
+// deleta produto especifico do usuário selecionado
 app.delete('/usuarios/:id_usuario/favoritos/:id_produto', async (req, res) => {
     const {id_usuario, id_produto} = req.params;
     try {

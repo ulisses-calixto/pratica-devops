@@ -85,7 +85,7 @@ export default function UsuariosCRUD() {
 
   return (
     <div className="max-w-5xl mx-auto p-6">
-      <h1 className="text-2xl font-bold text-gray-800 mb-8 border-b border-emerald-400 pb-6">
+      <h1 className="text-2xl font-bold text-gray-800 mb-8 border-b border-emerald-500 pb-6">
         Gerenciamento de Usuários
       </h1>
 

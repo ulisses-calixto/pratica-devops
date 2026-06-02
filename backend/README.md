@@ -1,15 +1,14 @@
 # API - Backend
 
-A API REST foi desenvolvida em Node.js para fim de prática com DevOps da disciplina DevOps Tools, ministrada pelo [Prof. Welligton Feitosa](https://github.com/spaaws). Este backend é responsável por gerenciar o cadastro de clientes (usuários), integrar com o catálogo de produtos de uma API externa e administrar as listas de favoritos de cada um.
+A API REST foi criada em Node.js. Ela é responsável por gerenciar o cadastro de clientes (usuários), integrar com o catálogo de produtos da API externa e administrar as listas de favoritos de cada um.
 
-## 🛠️ Tecnologias usadas
+## Tecnologias usadas
 
-* **Node.js** & **Express**: Estrutura principal do servidor da API criada.
+* **Node.js** & **Express**: Estrutura principal da API criada.
 * **PostgreSQL**: Banco de dados relacional (executado via container).
-* **Axios**: Integração HTTP com o catálogo de produtos (FakeStoreAPI).
 * **Docker & Docker Compose**: Orquestração e conteinerização do ambiente de desenvolvimento.
 
-## ⚙️ Pré-requisitos
+## Pré-requisitos
 
 Como este projeto está conteinerizado, você **não** precisa ter o Node.js ou o PostgreSQL instalados na sua máquina. Antes de começar, garanta apenas as seguintes ferramentas:
 * [Docker Desktop](https://www.docker.com/products/docker-desktop)
@@ -17,7 +16,7 @@ Como este projeto está conteinerizado, você **não** precisa ter o Node.js ou 
 
 ---
 
-## 🚀 Como rodar o projeto (Via Docker)
+## Como rodar o projeto (Via Docker)
 
 O ambiente foi configurado para que o Docker construa a imagem da API e levante o banco de dados PostgreSQL simultaneamente, configurando as tabelas necessárias de forma automática.
 
@@ -35,10 +34,10 @@ cd <NOME_DO_REPOSITORIO_CLONADO>
 cd backend
 ```
 
-### 2. Configuração das Variáveis de Ambiente
+### 2. Configuração das variáveis de ambiente
 Crie um arquivo chamado `.env` na raiz da pasta do backend (mesmo nível do `docker-compose.yml`) e adicione as variáveis abaixo.
 
-> **Nota:** Como estamos usando o Docker Compose, o `DB_HOST` deve ser o nome do serviço do banco definido no arquivo yml (geralmente `db` ou `postgres`), e não `localhost`.
+> **Obs:** Como estamos usando o Docker Compose, o `DB_HOST` deve ser o nome do serviço do banco definido no arquivo yml (geralmente `db` ou `postgres`), e não `localhost`.
 
 ```env
 PORT=2375
