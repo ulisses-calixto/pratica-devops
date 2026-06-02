@@ -8,18 +8,18 @@ export default function Navbar() {
 
   const linkAtivo = (caminho) => {
     return location.pathname === caminho
-      ? 'border-b border-b-2 border-emerald-500 text-black'
+      ? 'border-b border-b-4 border-emerald-500 text-black'
       : 'text-gray-500 hover:text-black';
   };
 
   const linkAtivoMd = (caminho) => {
     return location.pathname === caminho
-      ? 'border-l border-l-4 border-emerald-500 text-black'
-      : 'text-gray-500 hover:text-black';
+      ? 'border-l border-l-4 border-emerald-500 text-black bg-emerald-100'
+      : 'border-l border-l-4 border-gray-300 bg-gray-100 text-gray-500 hover:text-black';
   };
 
   return (
-    <nav className="bg-gray-50 sticky top-0 z-50 border-b shadow-sm border-gray-300">
+    <nav className="bg-gray-50 sticky top-0 z-50 border-b shadow-md border-gray-300">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           
@@ -83,21 +83,21 @@ export default function Navbar() {
             <Link 
               to="/usuarios" 
               onClick={() => setMenuAberto(false)}
-              className={`block py-3 px-6 text-xl font-medium ${linkAtivoMd('/usuarios')}`}
+              className={`block py-3 px-4 text-lg font-medium ${linkAtivoMd('/usuarios')}`}
             >
               Usuários
             </Link>
             <Link 
               to="/produtos" 
               onClick={() => setMenuAberto(false)}
-              className={`block py-3 px-6 text-xl font-medium ${linkAtivoMd('/produtos')}`}
+              className={`block py-3 px-4 text-lg font-medium ${linkAtivoMd('/produtos')}`}
             >
               Produtos
             </Link>
             <Link 
               to="/favoritos" 
               onClick={() => setMenuAberto(false)}
-              className={`block py-3 px-6 text-xl font-medium ${linkAtivoMd('/favoritos')}`}
+              className={`block py-3 px-4 text-lg font-medium ${linkAtivoMd('/favoritos')}`}
             >
               Favoritos
             </Link>

@@ -130,8 +130,8 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"nome": "Otavio Fidelis",
-            	"email": "otavio@email.com"
+            	"nome": "Ulisses Gomes",
+            	"email": "ulisses.gomes@email.com"
             }
         headers:
           - name: Content-Type
@@ -158,60 +158,6 @@ collection:
           description: ""
           sortKey: -1779571377735
         method: DELETE
-        headers:
-          - name: User-Agent
-            value: insomnia/12.6.0
-            description: ""
-            disabled: false
-        settings:
-          renderRequestBody: true
-          encodeUrl: true
-          followRedirects: global
-          cookies:
-            send: true
-            store: true
-          rebuildPath: true
-  - name: Produtos
-    meta:
-      id: fld_a906ab1925aa4fcc9dc5d08f7e66dc4c
-      created: 1779571489021
-      modified: 1779571489021
-      sortKey: -1779571489021
-      description: ""
-    children:
-      - url: http://localhost:2375/produtos
-        name: listar produtos
-        meta:
-          id: req_ffbafa7c41b942feb3b4c9bbe5ae56e7
-          created: 1779571493220
-          modified: 1779571534141
-          isPrivate: false
-          description: ""
-          sortKey: -1779571493220
-        method: GET
-        headers:
-          - name: User-Agent
-            value: insomnia/12.6.0
-            description: ""
-            disabled: false
-        settings:
-          renderRequestBody: true
-          encodeUrl: true
-          followRedirects: global
-          cookies:
-            send: true
-            store: true
-          rebuildPath: true
-      - url: http://localhost:2375/produtos/17
-        name: listar produtos(id)
-        meta:
-          id: req_12e47704598e49668ef66a693136b9de
-          created: 1779571598479
-          modified: 1779574545864
-          isPrivate: false
-          description: ""
-          sortKey: -1779571493120
-        method: GET
         headers:
           - name: User-Agent
             value: insomnia/12.6.0
@@ -265,12 +211,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: http://localhost:2375/usuarios/1/favoritos
+      - url: http://localhost:2375/usuarios/7/favoritos
         name: listar favoritos do usuario
         meta:
           id: req_de2ca40cd49d43f99a7d854a2e32a61d
           created: 1779572180143
-          modified: 1779586371391
+          modified: 1779652339339
           isPrivate: false
           description: ""
           sortKey: -1779571805676

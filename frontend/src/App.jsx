@@ -2,7 +2,7 @@ import React from "react";
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Usuarioscrud from "./pages/Usuarioscrud";
+import Usuarios from "./pages/Usuarios";
 import Produtos from "./pages/Produtos";
 import Favoritos from "./pages/Favoritos";
 
@@ -15,13 +15,13 @@ function App() {
                 <main className="flex-glow">
                     <Routes>
                         <Route path="/" element={<Navigate to="/usuarios" replace/>} />
-                        <Route path="/usuarios" element={<Usuarioscrud/>} />
+                        <Route path="/usuarios" element={<Usuarios/>} />
                         <Route path="/produtos" element={<Produtos/>} />
                         <Route path="/favoritos" element={<Favoritos/>} />
 
                         <Route path="*" element={
-                            <div className="flex flex-col justify-center italic items-center h-full font-extrabold text-4xl text-gray-300">
-                                *404
+                            <div className="flex flex-col italic w-auto items-center mt-36 font-extrabold text-4xl text-emerald-500">
+                                404
                                 <h6 className="text-xl font-normal">Página não encontrada</h6>
                             </div>
                         } />
